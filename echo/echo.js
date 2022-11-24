@@ -21,7 +21,7 @@ server
         response.end()
       })
   })
-  .listen(8083)
+  .listen(3001)
 
 function toHTML (json) {
   var html = '<html><body>'
