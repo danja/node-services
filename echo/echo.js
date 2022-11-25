@@ -16,13 +16,13 @@ server
         /* CORS */
         response.setHeader('Access-Control-Allow-Origin', '*')
         response.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET')
-        response.setHeader('Access-Control-Allow-Headers', 'Content-Type')
+        // response.setHeader('Access-Control-Allow-Headers', 'Content-Type')
         response.setHeader('Access-Control-Max-Age', 2592000) // 30 days -  preflight request cache time
 
         // hacky
         if (request.headers.accept.startsWith('application/json')) {
           response.setHeader('Content-Type', 'application/json')
-          response.write(request.headers)
+          response.write(JSON.stringify(request.headers))
         } else {
           // default to HTML
           response.setHeader('Content-Type', 'text/html')
