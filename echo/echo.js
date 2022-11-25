@@ -16,6 +16,7 @@ server
         /* CORS */
         response.setHeader('Access-Control-Allow-Origin', '*')
         response.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET')
+        response.setHeader('Access-Control-Allow-Headers', 'Content-Type')
         response.setHeader('Access-Control-Max-Age', 2592000) // 30 days -  preflight request cache time
 
         // hacky
