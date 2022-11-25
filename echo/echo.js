@@ -19,15 +19,12 @@ server
         response.setHeader('Access-Control-Allow-Headers', 'Accept')
         response.setHeader('Access-Control-Max-Age', 2592000) // 30 days -  preflight request cache time
 
-        // console.log(request.headers.accept)
-        // hacky request.headers.accept.startsWith('application/json')
-        if (request.headers.accept.startsWith('*/*')) {
-          // console.log('json')
+        // hacky
+        if (request.headers.accept.startsWith('application/json')) {
           response.setHeader('Content-Type', 'application/json')
           response.write(JSON.stringify(request.headers))
         } else {
           // default to HTML
-          //  console.log('html')
           response.setHeader('Content-Type', 'text/html')
           response.write(`${request.method} ${request.url}`) // for now
           response.write(toHTML(JSON.parse(JSON.stringify(request.headers)))) // crazy but true
