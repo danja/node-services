@@ -19,7 +19,7 @@ server
         response.setHeader('Access-Control-Allow-Headers', 'Accept')
         response.setHeader('Access-Control-Max-Age', 2592000) // 30 days -  preflight request cache time
 
-        // hacky
+        // hacky application/x-turtle
         if (request.headers.accept.startsWith('application/json')) {
           response.setHeader('Content-Type', 'application/json')
           response.write(JSON.stringify(request.headers))
