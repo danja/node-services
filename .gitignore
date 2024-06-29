@@ -1,6 +1,9 @@
 # Environmental variables
 **/.env
 
+# bits
+**/private
+
 
 # Logs
 logs
