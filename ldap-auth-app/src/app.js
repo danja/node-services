@@ -44,7 +44,7 @@ passport.deserializeUser((user, done) => {
 
 // Routes
 app.get('/users/', (req, res) => {
-    res.send('Home Page');
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 app.get('/users/login', (req, res) => {
