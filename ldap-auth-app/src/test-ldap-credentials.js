@@ -1,4 +1,3 @@
-import ldap from 'ldapjs';
 import dotenv from 'dotenv';
 
 dotenv.config();
