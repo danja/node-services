@@ -75,7 +75,7 @@ app.get('/users/login-success', (req, res) => {
     if (req.isAuthenticated()) {
         res.send('Login successful! Welcome, ' + req.user.cn);
     } else {
-        res.redirect('/login');
+        res.redirect('/user/login');
     }
 });
 
