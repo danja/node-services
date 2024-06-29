@@ -20,7 +20,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(session({ secret: process.env.SESSION_SECRET, resave: false, saveUninitialized: false }));
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(express.static('public')); // Serve static files
+app.use(express.static(path.join(__dirname, 'public'))); // Serve static files
 
 const LDAP_OPTIONS = {
     server: {
