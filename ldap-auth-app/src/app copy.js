@@ -22,7 +22,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(session({ secret: process.env.SESSION_SECRET, resave: false, saveUninitialized: false }));
 app.use(passport.initialize());
 app.use(passport.session());
-app.use('/users', express.static(path.join(__dirname, 'public'))); // Serve static files under 
+app.use('/users', express.static(path.join(__dirname, 'public'))); // Serve static files under /users
 
 const LDAP_OPTIONS = {
     server: {
@@ -45,17 +45,17 @@ passport.deserializeUser((user, done) => {
 });
 
 // Routes
-app.get('/', (req, res) => {
-    console.log('get /')
+app.get('/users/', (req, res) => {
+    console.log('get /users/')
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-app.get('/login', (req, res) => {
-    console.log('get /login')
+app.get('/users/login', (req, res) => {
+    console.log('get /users/login')
     res.sendFile(path.join(__dirname, 'public', 'login.html'));
 });
 
-app.post('/login', (req, res, next) => {
+app.post('/users/login', (req, res, next) => {
     passport.authenticate('ldapauth', (err, user, info) => {
         if (err) {
             console.error('Authentication error:', err);
@@ -63,19 +63,19 @@ app.post('/login', (req, res, next) => {
         }
         if (!user) {
             console.log('Authentication failed:', info);
-            return res.redirect('/login?error=1');
+            return res.redirect('/users/login?error=1');
         }
         req.logIn(user, (err) => {
             if (err) {
                 console.error('Login error:', err);
                 return next(err);
             }
-            return res.redirect('/login-success');
+            return res.redirect('/users/login-success');
         });
     })(req, res, next);
 });
 
-app.get('/login-success', (req, res) => {
+app.get('/users/login-success', (req, res) => {
     if (req.isAuthenticated()) {
         res.send('Login successful! Welcome, ' + req.user.cn);
     } else {
@@ -83,17 +83,17 @@ app.get('/login-success', (req, res) => {
     }
 });
 
-app.get('/logout', (req, res) => {
+app.get('/users/logout', (req, res) => {
     req.logout();
-    res.redirect('/');
+    res.redirect('/users/');
 });
 
 // Add the signup route
-app.get('/signup', (req, res) => {
+app.get('/users/signup', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'signup.html'));
 });
 
-app.post('/signup', (req, res) => {
+app.post('/users/signup', (req, res) => {
     const { username, password } = req.body;
 
     const ldapClient = ldap.createClient({

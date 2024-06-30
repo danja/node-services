@@ -11,3 +11,17 @@ pm2 start echo.js
 or
 
 pm2-dev start echo.js
+
+On the server, if I do
+curl http://localhost:3050/users/
+I get the desired result.
+nginx has :
+location /users/ {
+proxy_pass http://localhost:3050/;
+proxy_set_header Host $host;
+}
+in a browser, it needs an extra bit of path,
+https://hyperdata.it/users/users/
+how do I get this to respond at
+https://hyperdata.it/users/
+?
