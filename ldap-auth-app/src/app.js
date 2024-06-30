@@ -63,14 +63,14 @@ app.post('/login', (req, res, next) => {
         }
         if (!user) {
             console.log('Authentication failed:', info);
-            return res.redirect('/login?error=1');
+            return res.redirect('login?error=1');
         }
         req.logIn(user, (err) => {
             if (err) {
                 console.error('Login error:', err);
                 return next(err);
             }
-            return res.redirect('/login-success');
+            return res.redirect('login-success');
         });
     })(req, res, next);
 });
@@ -79,7 +79,7 @@ app.get('/login-success', (req, res) => {
     if (req.isAuthenticated()) {
         res.send('Login successful! Welcome, ' + req.user.cn);
     } else {
-        res.redirect('/user/login');
+        res.redirect('login');
     }
 });
 
