@@ -22,7 +22,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(session({ secret: process.env.SESSION_SECRET, resave: false, saveUninitialized: false }));
 app.use(passport.initialize());
 app.use(passport.session());
-app.use('/users', express.static(path.join(__dirname, 'public'))); // Serve static files under 
+app.use('/', express.static(path.join(__dirname, 'public'))); // Serve static files under public at /
 
 const LDAP_OPTIONS = {
     server: {
