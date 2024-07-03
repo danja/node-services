@@ -15,13 +15,12 @@ const incorrectAuth = 'Basic ' + Buffer.from(username + ':wrongpassword').toStri
 
 async function sendRequest(authHeader) {
     try {
-        /*
         console.log('Sending request with headers:', {
             'Content-Type': 'application/sparql-update',
             'Authorization': authHeader
         });
         console.log('Request body:', query);
-*/
+
         const response = await fetch(endpoint, {
             method: 'POST',
             headers: {
@@ -31,7 +30,6 @@ async function sendRequest(authHeader) {
             body: query
         });
 
-
         console.log('Response status code:', response.status); // Log the response status code
 
         if (response.ok) {
@@ -40,7 +38,7 @@ async function sendRequest(authHeader) {
             console.error('Failed to add triple:', response.statusText);
             // Log the response body for more details
             const errorDetails = await response.text();
-            //   console.error('Error details:', errorDetails);
+            console.error('Error details:', errorDetails);
         }
     } catch (error) {
         // Catch and log any network or other errors
@@ -51,7 +49,7 @@ async function sendRequest(authHeader) {
 async function sendRequestWithoutAuth() {
     try {
         console.log('Sending request without authentication headers');
-        //  console.log('Request body:', query);
+        console.log('Request body:', query);
 
         const response = await fetch(endpoint, {
             method: 'POST',
@@ -63,19 +61,17 @@ async function sendRequestWithoutAuth() {
 
         console.log('Response status code:', response.status); // Log the response status code
 
-
         if (response.ok) {
             console.log('Triple added successfully without authentication!');
         } else {
             console.error('Failed to add triple without authentication:', response.statusText);
             // Log the response body for more details
-            //     const errorDetails = await response.text();
-            // console.error('Error details:', errorDetails);
+            const errorDetails = await response.text();
+            console.error('Error details:', errorDetails);
         }
     } catch (error) {
         // Catch and log any network or other errors
-        // console.error('Request failed without authentication:', error);
-        console.error('Request failed, not ok');
+        console.error('Request failed without authentication:', error);
     }
 }
 
