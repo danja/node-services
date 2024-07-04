@@ -1,1 +1,3 @@
 # node-services
+
+this repo contained some old bits I had for server troubleshooting, just added `ldap-auth-app`, work in progress...
